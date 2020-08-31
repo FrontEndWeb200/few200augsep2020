@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TodoListItem } from '../../../models';
 @Component({
   selector: 'app-todo-list',
@@ -7,10 +7,10 @@ import { TodoListItem } from '../../../models';
 })
 export class TodoListComponent implements OnInit {
 
-  items: TodoListItem[] = [
-    { description: 'Mow Lawn', completed: false },
-    { description: 'Clean Windows', completed: true }
-  ];
+  @Input() items: TodoListItem[] = [];
+  @Input() caption = 'Your List of Todos';
+  @Output() itemCompleted = new EventEmitter<TodoListItem>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +18,6 @@ export class TodoListComponent implements OnInit {
 
   markComplete(item: TodoListItem): void {
     // trivial implementaion
-    item.completed = true;
+    this.itemCompleted.emit(item);
   }
 }
