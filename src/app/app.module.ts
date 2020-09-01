@@ -18,6 +18,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { CounterEffects } from './effects/counter.effects';
+import { MediaModule } from './features/media/media.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,10 +34,11 @@ import { CounterEffects } from './effects/counter.effects';
   ],
   imports: [
     BrowserModule,
+    MediaModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([CounterEffects])
+    EffectsModule.forRoot([CounterEffects]),
   ],
   providers: [CommunicationsService],
   bootstrap: [AppComponent]
