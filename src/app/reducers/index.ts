@@ -12,3 +12,16 @@ export interface AppState {
 export const reducers = {
   counter: fromCounter.reducer
 };
+
+
+// Selector Functions
+
+// 1. Create a feature selector (if you are in a feature. we aren't. We will later.)
+
+// 2. Create a selector per "branch" of your application state.
+
+// 3. Create any "helper" selectors you might need (optional)
+
+// 4. Create a selector that returns specificially the data the component needs.
+
+export const selectCurrentCount = (state: AppState) => state.counter.current;
