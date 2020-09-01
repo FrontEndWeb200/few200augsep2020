@@ -8,6 +8,7 @@ import { CreateComponent } from './components/create/create.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, featureName } from './reducers';
+import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: 'media',
@@ -34,7 +35,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(featureName, reducers)
+    StoreModule.forFeature(featureName, reducers),
+    ReactiveFormsModule
   ]
 })
 export class MediaModule { }
