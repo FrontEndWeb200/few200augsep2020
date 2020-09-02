@@ -74,3 +74,8 @@ export const selectMediaList = createSelector(
     }
   }
 );
+
+export const selectMediaLoaded = createSelector(
+  selectUiHintsBranch,
+  b => b.mediaLoaded
+);
