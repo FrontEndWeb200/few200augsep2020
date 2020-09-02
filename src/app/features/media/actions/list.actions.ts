@@ -12,6 +12,16 @@ export const addedMediaItem = createAction(
   })
 );
 
+export const addedMediaItemSucceeded = createAction(
+  '[media] added media item succeeded',
+  props<{ tempId: string, payload: ListEntity }>()
+);
+
+export const addedMediaFailure = createAction(
+  '[media] added media item failed',
+  props<{ payload: ListEntity, errorMessage: string }>()
+);
+
 
 export const loadMediaData = createAction(
   '[media] load media data'
