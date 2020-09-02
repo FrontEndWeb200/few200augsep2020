@@ -1,14 +1,31 @@
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, } from '@ngrx/effects';
 import { HttpClient } from '@angular/common/http';
 import * as actions from '../actions/list.actions';
 import { environment } from '../../../../environments/environment'; // ALWAYS IMPORT THIS ONE! ANGULAR WILL FIGURE IT OUT!
 import { Injectable } from '@angular/core';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError, filter } from 'rxjs/operators';
 import { ListEntity } from '../reducers/list.reducer';
 import { of } from 'rxjs';
 
 @Injectable()
 export class ListEffects {
+
+  // we we get a mediaItemRemoved -> send it to the api -> (nothing! | mediaItemRemovedFailure)
+  removeItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.removedMediaItem),
+      switchMap((item) => this.client.delete(environment.apiUrl + `media/${item.payload.id}`)
+        .pipe(
+          filter(() => false),
+          map(() => ({ type: 'noop' })),
+          catchError((e) => of(actions.removedMediaItemFailure({
+            payload: item.payload,
+            message: `Failed To Delete ${item.payload.title} `
+          }))),
+        )
+      )
+    )
+  );
 
   // When we get a mediaItemAdded -> send it to the API -> (mediaItemAddedSucces | mediaItemAddedFailure)
 

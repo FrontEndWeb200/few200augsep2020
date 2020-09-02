@@ -36,3 +36,20 @@ export const loadMediaDataFailed = createAction(
   '[media] loading media data failed',
   props<{ message: string }>()
 );
+
+
+export const removedMediaItem = createAction(
+  '[media] media item removed',
+  props<{ payload: ListEntity }>()
+);
+
+export const removedMediaItemFailure = createAction(
+  '[media] media item removed failed',
+  props<{ payload: ListEntity, message: string }>()
+);
+
+
+export const makeUpperCaseTitle = createAction(
+  '[media] make upper case title',
+  props<{ payload: ListEntity }>()
+);
